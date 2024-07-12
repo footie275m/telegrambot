@@ -1,0 +1,12 @@
+API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
+headers = {"Authorization": "Bearer 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"}
+
+def summarization(payload):
+	response = requests.post(API_URL, headers=headers, json=payload)
+	return response.json()
+	
+output = summarization({
+	"inputs": data['Ollie Watkins: Four Touches, One Goal, One Final']['News Description'],
+    "parameters": {"max_length": 150, "min_length": 50, "do_sample": False}
+})
+print(output[0]['summary_text'])
